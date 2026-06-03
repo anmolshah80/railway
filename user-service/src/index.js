@@ -20,3 +20,25 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.send('Hello world from user-service');
 });
+
+app.get('/health-check', (req, res) => {
+  res.status(200).json({
+    message: `${config.SERVICE_NAME} operational`,
+  });
+});
+
+app.use(errorHandler);
+
+const startServer = async () => {
+  try {
+    const server = app.listen(config.PORT, () => {
+      logger.info(
+        `${config.SERVICE_NAME} is running on http://localhost:${config.PORT}`,
+      );
+    });
+  } catch (error) {
+    logger.error('An error occurred while starting the service: ', error);
+  }
+};
+
+startServer();

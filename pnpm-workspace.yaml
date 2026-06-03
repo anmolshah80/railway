@@ -1,0 +1,4 @@
+packages:
+  - 'packages/*'
+  - 'user-service'
+  - 'booking-service'

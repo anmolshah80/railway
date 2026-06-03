@@ -1,0 +1,15 @@
+{
+  "name": "railway-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev:user-service": "pnpm --filter user-service dev",
+    "dev:booking-service": "pnpm --filter booking-service dev",
+    "dev:all-services": "pnpm --stream -r run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.17.0"
+}

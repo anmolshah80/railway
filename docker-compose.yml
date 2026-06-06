@@ -10,7 +10,8 @@ services:
       POSTGRES_PASSWORD: pgadmin143
       POSTGRES_DB: railway_db
     ports:
-      - "5433:5433"
+      # Mapping the container's PostgreSQL port to a different host port (5434) to avoid conflicts with any local PostgreSQL installation
+      - "5434:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
   

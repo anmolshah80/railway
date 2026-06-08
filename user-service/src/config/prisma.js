@@ -1,5 +1,5 @@
 const { PrismaPg } = require('@prisma/adapter-pg');
-const { PrismaClient } = require('../../generated/prisma/client');
+const { PrismaClient } = require('@prisma/client');
 const { config } = require('.');
 
 const connectionString = config.DATABASE_URL;

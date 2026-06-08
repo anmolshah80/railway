@@ -142,4 +142,5 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
 
-user-service/generated/prisma
+# the app uses commonjs syntax so we can ignore the generated prisma client as it is not used directly in the codebase
+# user-service/generated/prisma

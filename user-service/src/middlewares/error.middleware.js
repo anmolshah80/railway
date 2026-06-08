@@ -3,7 +3,7 @@ const { config } = require('../config');
 const logger = require('../config/logger');
 
 module.exports = (err, req, res, next) => {
-  if (err instanceof Error) {
+  if (err instanceof AppError) {
     return res.status(err.statusCode).json({
       success: false,
       error: err.code,

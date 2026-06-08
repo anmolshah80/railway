@@ -54,7 +54,7 @@ async function sendOtpEmail(email, otp) {
       </div>
 
       <p style="font-size: 15px; color: #555;">
-        This code will expire in <strong>${ttlMinutes} minutes</strong>.
+        This code will expire in <strong>${minutes} minutes</strong>.
       </p>
 
       <p style="font-size: 15px; color: #555;">
@@ -84,3 +84,8 @@ async function verifyOtpEmail(meta) {
 
   await sgMail.send(message);
 }
+
+module.exports = {
+  sendOtpEmail,
+  verifyOtpEmail,
+};

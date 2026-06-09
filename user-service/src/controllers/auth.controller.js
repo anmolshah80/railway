@@ -22,9 +22,9 @@ exports.sendOTP = asyncHandler(async (req, res) => {
   );
 
   res
-    .cookie('railway-app-otp-session-id', otpSessionId, {
+    .cookie('railway-app-otp-session', otpSessionId, {
       httpOnly: true,
-      secure: true,
+      secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
       maxAge: config.OTP_TTL * 1000, // default 5 minutes
     })
@@ -33,4 +33,24 @@ exports.sendOTP = asyncHandler(async (req, res) => {
       success: true,
       message: 'OTP sent successfully',
     });
+});
+
+exports.verifyOTP = asyncHandler(async (req, res) => {
+  const { otp } = req.body;
+
+  console.log('otpSessionId from cookie:', req.cookies);
+
+  const otpSessionId = req.cookies['railway-app-otp-session'];
+
+  if (!otp || !otpSessionId) {
+    throw new BadRequestError('OTP or OTP Session is missing');
+  }
+
+  const user = await authService.verifyOTP(otp, otpSessionId);
+
+  return res.status(201).json({
+    success: true,
+    message: 'User account created and verified successfully',
+    data: user,
+  });
 });

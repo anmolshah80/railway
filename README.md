@@ -74,3 +74,26 @@
 
       pnpm dlx prisma migrate dev
       ```
+
+- `Secure: true` with an HTTP URL (e.g., `http://localhost:4001`). Postman respects `Secure` and will not store the cookie for non-HTTPS endpoints so either,
+  - Set `secure: false` in `development` or,
+  - Change the route names, and request bodies in the same request (inside the Postman collection)
+  - Use `/api/v1/auth/send-otp` to send otp to the user with the following request body to test the route in Postman
+
+    ```json
+    {
+      "firstName": "John",
+      "lastName": "Wick",
+      "email": "johnwick@gmail.com",
+      "password": "JohnWick@143",
+      "confirmPassword": "JohnWick@143"
+    }
+    ```
+
+  - Use `/api/v1/auth/verify-otp` to verify otp sent by the user with the following request body to test the route in Postman
+
+    ```json
+    {
+      "otp": "535003"
+    }
+    ```

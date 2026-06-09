@@ -16,7 +16,7 @@ const config = {
     process.env.OTP_HMAC_SECRET ||
     '09dc0abbb2961391d822610b31b912e3231d4d2745c76b1ef4765af4c62f6079',
 
-  MAIL_SEND: process.env.MAIL_SEND,
+  SENDER_EMAIL_ADDRESS: process.env.SENDER_EMAIL_ADDRESS,
   SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
 };
 
@@ -24,8 +24,8 @@ if (!config.SENDGRID_API_KEY) {
   throw new Error('SENDGRID_API_KEY is missing');
 }
 
-if (!config.MAIL_SEND) {
-  throw new Error('MAIL_SEND is missing');
+if (!config.SENDER_EMAIL_ADDRESS) {
+  throw new Error('SENDER_EMAIL_ADDRESS is missing');
 }
 
 module.exports = { config };

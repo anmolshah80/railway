@@ -38,8 +38,6 @@ exports.sendOTP = asyncHandler(async (req, res) => {
 exports.verifyOTP = asyncHandler(async (req, res) => {
   const { otp } = req.body;
 
-  console.log('otpSessionId from cookie:', req.cookies);
-
   const otpSessionId = req.cookies['railway-app-otp-session'];
 
   if (!otp || !otpSessionId) {

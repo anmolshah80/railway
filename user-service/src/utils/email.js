@@ -10,7 +10,7 @@ const otpExpiresIn = (config.OTP_TTL || 300) / 60;
 async function sendOtpEmail(email, otp) {
   const message = {
     to: email,
-    from: `${config.MAIL_SEND}`,
+    from: `${config.SENDER_EMAIL_ADDRESS}`,
     subject: 'OTP Verification Code for Railway App',
     text: `Your OTP Verification Code for Railway App is ${otp}. It will expire in ${otpExpiresIn} minutes.`,
     html: `
@@ -76,7 +76,7 @@ async function sendOtpEmail(email, otp) {
 async function verifyOtpEmail(meta) {
   const message = {
     to: meta.email,
-    from: `${config.MAIL_SEND}`,
+    from: `${config.SENDER_EMAIL_ADDRESS}`,
     subject: 'OTP Verified Successfully',
     text: `Your OTP has been verified successfully. Welcome to Railway!`,
     html: `

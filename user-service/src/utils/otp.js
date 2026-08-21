@@ -1,5 +1,6 @@
 const otpGenerator = require('otp-generator');
 const crypto = require('crypto');
+
 const { redis } = require('../config/redis');
 const { config } = require('../config');
 const { TooManyRequestsError } = require('./error');

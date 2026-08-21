@@ -39,7 +39,7 @@
       ```yaml
       # docker-compose.yml
       ports:
-        - '5434:5432' # host:container
+        - '5434:5432' # host_port:docker_container_port
       ```
 
     - Then restart the containers

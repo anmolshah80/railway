@@ -1,5 +1,6 @@
 const authService = require('../services/auth.service');
 const asyncHandler = require('../utils/asyncHandler');
+const getDeviceFingerprint = require('../utils/deviceFingerprint');
 const { BadRequestError } = require('../utils/error');
 const { config } = require('../config');
 
@@ -51,4 +52,14 @@ exports.verifyOTP = asyncHandler(async (req, res) => {
     message: 'User account created and verified successfully',
     data: user,
   });
+});
+
+exports.login = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    throw new BadRequestError('Email and Password are required');
+  }
+
+  const deviceId = getDeviceFingerprint(req);
 });

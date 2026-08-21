@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const prisma = require('../config/prisma');
+
 const { ConflictError, BadRequestError } = require('../utils/error');
 const { generateAndStoreOtp, verifyOtp } = require('../utils/otp');
 const { sendOtpEmail, verifyOtpEmail } = require('../utils/email');

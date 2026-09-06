@@ -22,6 +22,7 @@ exports.generateAccessToken = (userId) => {
 exports.generateRefreshToken = (userId) => {
   const payload = {
     id: userId,
+    jti: crypto.randomUUID(),
   };
 
   return jwt.sign(payload, config.JWT_REFRESH_SECRET, {

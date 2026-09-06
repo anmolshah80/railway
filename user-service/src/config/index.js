@@ -7,6 +7,8 @@ const config = {
   LOG_LEVEL: process.env.LOG_LEVEL || 'info',
   DATABASE_URL: process.env.DATABASE_URL,
   REDIS_URL: process.env.REDIS_URL || 'redis://:railwayapp@redis:6379',
+  KAFKA_BROKER: process.env.KAFKA_BROKER,
+  KAFKA_CLIENT_ID: process.env.KAFKA_CLIENT_ID,
   ALLOWED_ORIGINS: process.env.ALLOWED_ORIGINS || 'http://localhost:4000',
 
   OTP_TTL: process.env.OTP_TTL || 300, // in seconds
@@ -26,14 +28,21 @@ const config = {
   ACCESS_TOKEN_EXP_SEC: Number(process.env.ACCESS_TOKEN_EXP_SEC || 900),
   REFRESH_TOKEN_EXP_SEC: Number(process.env.REFRESH_TOKEN_EXP_SEC || 604800),
   REDIS_USER_TTL: Number(process.env.REDIS_USER_TTL || 86400),
+
+  GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
 };
 
+if (!config.GOOGLE_CLIENT_ID) {
+  throw new Error('GOOGLE_CLIENT_ID environment variable is required');
+}
+
 if (!config.SENDGRID_API_KEY) {
-  throw new Error('SENDGRID_API_KEY is missing');
+  throw new Error('SENDGRID_API_KEY environment variable is missing');
 }
 
 if (!config.SENDER_EMAIL_ADDRESS) {
-  throw new Error('SENDER_EMAIL_ADDRESS is missing');
+  throw new Error('SENDER_EMAIL_ADDRESS environment variable is missing');
 }
 
 module.exports = { config };

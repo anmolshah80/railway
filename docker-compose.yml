@@ -11,7 +11,7 @@ services:
       POSTGRES_DB: railway_db
     ports:
       # Mapping the container's PostgreSQL port to a different host port (5434) to avoid conflicts with any local PostgreSQL installation
-      - "5434:5432"
+      - "5434:5432" # host_port:container_port
     volumes:
       - postgres_data:/var/lib/postgresql/data
   

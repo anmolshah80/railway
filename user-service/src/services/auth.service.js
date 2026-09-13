@@ -93,12 +93,12 @@ const login = async (email, password, deviceId) => {
     );
   }
 
-  const doesPasswordMatch = await bcrypt.compare(
+  const isPasswordMatching = await bcrypt.compare(
     password,
     existingUser.password,
   );
 
-  if (!doesPasswordMatch) {
+  if (!isPasswordMatching) {
     throw new UnauthorizedError(
       'Invalid email or password',
       'INVALID_CREDENTIALS',

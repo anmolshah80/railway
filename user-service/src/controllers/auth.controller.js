@@ -71,6 +71,31 @@ exports.login = asyncHandler(async (req, res) => {
   }
 
   const deviceId = getDeviceFingerprint(req);
+
+  const { accessToken, refreshToken, loggedInUser } = await authService.login(
+    email,
+    password,
+    deviceId,
+  );
+
+  res.cookie(
+    'accessToken',
+    accessToken,
+    cookieOptions(config.ACCESS_TOKEN_EXP_SEC * 1000),
+  );
+
+  res
+    .cookie(
+      'refreshToken',
+      refreshToken,
+      cookieOptions(config.REFRESH_TOKEN_EXP_SEC * 1000),
+    )
+    .status(200)
+    .json({
+      success: true,
+      message: 'Logged in successfully',
+      loggedInUser,
+    });
 });
 
 exports.rotateRefreshToken = asyncHandler(async (req, res) => {

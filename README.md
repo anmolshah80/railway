@@ -97,3 +97,31 @@
       "otp": "535003"
     }
     ```
+
+## How to add the server in pgAdmin
+
+`pgAdmin` doesn't auto-discover databases. It's just a management UI — when you open it for the first time, there are zero server connections registered. You have to add the PostgreSQL server yourself. The database `railway_db` is being created (your compose file's `POSTGRES_DB: railway_db` does that on first boot), you just haven't told pgAdmin where to find it.
+
+- In the pgAdmin left sidebar, right-click **Servers → Register → Server…**
+
+- On the **General** tab, give it any name, e.g. `railway-postgres`.
+
+- On the **Connection** tab, use these values:
+
+  | Field                | Value        |
+  | -------------------- | ------------ |
+  | Host name/address    | `postgres`   |
+  | Port                 | `5432`       |
+  | Maintenance database | `postgres`   |
+  | Username             | `postgres`   |
+  | Password             | `pgadmin143` |
+
+  **Important:** Use `postgres` as the host and `5432` as the port — not `localhost` and not `5434`.
+
+  Why? pgAdmin and Postgres are **both containers on the same Docker network** (`railway-backend_default`). Inside a Docker network, containers reach each other by **service name** (`postgres`) on the internal container port (`5432`). The `5434:5432` mapping only exists for things running on your host machine (like your Node app + Prisma).
+
+  Also — `localhost` inside the pgAdmin container would refer to the pgAdmin container itself, not Postgres. That's a very common source of confusion.
+
+- Optionally, check Save password? so you don't retype it.
+
+- Click Save.

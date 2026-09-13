@@ -140,7 +140,7 @@ const rotateRefreshToken = async (refreshToken, deviceId) => {
   const storedJti = await redis.get(`refresh:${userId}:${deviceId}`);
 
   if (!storedJti) {
-    throw new ForbiddenError('Session Expired', 'Login Again');
+    throw new ForbiddenError('Session Expired', 'LOGIN AGAIN');
   }
 
   if (storedJti !== jti) {

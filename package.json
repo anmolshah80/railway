@@ -6,6 +6,7 @@
   "scripts": {
     "dev:user-service": "pnpm --filter user-service dev",
     "dev:booking-service": "pnpm --filter booking-service dev",
+    "dev:notification-service": "pnpm --filter notification-service dev",
     "dev:all-services": "pnpm --stream -r run dev"
   },
   "keywords": [],

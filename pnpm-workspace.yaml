@@ -2,3 +2,4 @@ packages:
   - 'packages/*'
   - 'user-service'
   - 'booking-service'
+  - 'notification-service'

@@ -14,6 +14,28 @@ importers:
         specifier: ^3.1.14
         version: 3.1.14
 
+  notification-service:
+    dependencies:
+      '@sendgrid/mail':
+        specifier: ^8.1.6
+        version: 8.1.6
+      dotenv:
+        specifier: ^17.4.2
+        version: 17.4.2
+      express:
+        specifier: ^5.2.1
+        version: 5.2.1
+      kafkajs:
+        specifier: ^2.2.4
+        version: 2.2.4
+      winston:
+        specifier: ^3.19.0
+        version: 3.19.0
+    devDependencies:
+      nodemon:
+        specifier: ^3.1.14
+        version: 3.1.14
+
   user-service:
     dependencies:
       '@prisma/adapter-pg':

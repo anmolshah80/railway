@@ -5,12 +5,10 @@ const prisma = require('../config/prisma');
 
 const {
   BadRequestError,
-  ConflictError,
   ForbiddenError,
   UnauthorizedError,
 } = require('../utils/error');
 const { generateAndStoreOtp, verifyOtp } = require('../utils/otp');
-const { sendOtpEmail, verifyOtpEmail } = require('../utils/email');
 const {
   generateAccessToken,
   generateRefreshToken,

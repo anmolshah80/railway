@@ -2,7 +2,7 @@ const { config } = require('../config');
 const { redis } = require('../config/redis');
 const prisma = require('../config/prisma');
 const logger = require('../config/logger');
-const { BadRequestError } = require('../utils/error');
+const { BadRequestError, NotFoundError } = require('../utils/error');
 
 const getProfile = async (userId) => {
   logger.info(`Fetching profile for user ID: ${userId}`);
@@ -28,7 +28,7 @@ const getProfile = async (userId) => {
   if (!user) {
     logger.error(`User not found for user ID: ${userId}`);
 
-    throw new BadRequestError('User not found', 'USER_NOT_FOUND');
+    throw new NotFoundError('User not found', 'USER_NOT_FOUND');
   }
 
   logger.info('Exclude password from the user object before returning');
@@ -51,6 +51,42 @@ const getProfile = async (userId) => {
 
 const updateProfile = async (userId, profileData) => {
   logger.info(`Updating profile for user ID: ${userId}`);
+
+  logger.info('Check if user exists in the database before updating');
+
+  const existingUser = await prisma.user.findUnique({
+    where: { id: userId },
+  });
+
+  if (!existingUser) {
+    logger.error(`User not found for user ID: ${userId}`);
+
+    throw new NotFoundError('User not found', 'USER_NOT_FOUND');
+  }
+
+  // TODO: Check before committing
+  // logger.info('Check if the request body contains a non-existing field in the user model');
+
+  // const validFields = Object.keys(prisma.user.fields);
+
+  // const invalidFields = Object.keys(profileData).filter(
+  //   (field) => !validFields.includes(field),
+  // );
+
+  // if (invalidFields.length > 0) {
+  //   logger.error(
+  //     `Invalid fields in the request body for user ID: ${userId}: ${invalidFields.join(
+  //       ', ',
+  //     )}`,
+  //   );
+
+  //   throw new BadRequestError(
+  //     `Invalid fields in the request body: ${invalidFields.join(', ')}`,
+  //     'INVALID_FIELDS',
+  //   );
+  // }
+
+  logger.info('Updating user profile in the database');
 
   const updatedUser = await prisma.user.update({
     where: { id: userId },
@@ -77,6 +113,18 @@ const updateProfile = async (userId, profileData) => {
 
 const deleteProfile = async (userId) => {
   logger.info(`Deleting profile for user ID: ${userId}`);
+
+  logger.info('Check if user exists in the database before deleting');
+
+  const existingUser = await prisma.user.findUnique({
+    where: { id: userId },
+  });
+
+  if (!existingUser) {
+    logger.error(`User not found for user ID: ${userId}`);
+
+    throw new NotFoundError('User not found', 'USER_NOT_FOUND');
+  }
 
   await prisma.user.delete({
     where: { id: userId },

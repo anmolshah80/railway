@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const { config } = require('../config');
 const { redis } = require('../config/redis');
 const prisma = require('../config/prisma');
@@ -64,29 +65,35 @@ const updateProfile = async (userId, profileData) => {
     throw new NotFoundError('User not found', 'USER_NOT_FOUND');
   }
 
-  // TODO: Check before committing
-  // logger.info('Check if the request body contains a non-existing field in the user model');
+  logger.info(
+    'Check if the request body contains a non-existing field in the user model',
+  );
 
-  // const validFields = Object.keys(prisma.user.fields);
+  const validFields = Object.keys(prisma.user.fields);
 
-  // const invalidFields = Object.keys(profileData).filter(
-  //   (field) => !validFields.includes(field),
-  // );
+  const invalidFields = Object.keys(profileData).filter(
+    (field) => !validFields.includes(field),
+  );
 
-  // if (invalidFields.length > 0) {
-  //   logger.error(
-  //     `Invalid fields in the request body for user ID: ${userId}: ${invalidFields.join(
-  //       ', ',
-  //     )}`,
-  //   );
+  if (invalidFields.length > 0) {
+    logger.error(
+      `Invalid fields in the request body for user ID: ${userId}: ${invalidFields.join(
+        ', ',
+      )}`,
+    );
 
-  //   throw new BadRequestError(
-  //     `Invalid fields in the request body: ${invalidFields.join(', ')}`,
-  //     'INVALID_FIELDS',
-  //   );
-  // }
+    throw new BadRequestError(
+      `Invalid fields in the request body: ${invalidFields.join(', ')}`,
+      'INVALID_FIELDS',
+    );
+  }
 
   logger.info('Updating user profile in the database');
+
+  // hash the password before updating if it is present in the profileData
+  if (profileData.password) {
+    profileData.password = await bcrypt.hash(profileData.password, 12);
+  }
 
   const updatedUser = await prisma.user.update({
     where: { id: userId },

@@ -3,3 +3,4 @@ packages:
   - 'user-service'
   - 'booking-service'
   - 'notification-service'
+  - 'api-gateway'

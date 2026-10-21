@@ -2,7 +2,7 @@ const { UnauthorizedError } = require('../utils/error');
 
 /**
  * Extract user context from gateway headers
- * Gateway sets x-user-id after JWT verification
+ * Gateway sets `x-user-id` after JWT verification
  *
  */
 function getUserContext(req, _res, next) {

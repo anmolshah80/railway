@@ -4,9 +4,9 @@ const { UnauthorizedError } = require('../utils/error');
 const logger = require('../config/logger');
 
 /**
- * Middleware to verify access token from Authorization header
- * This is going to be the authentication mechanism which will authenticate user
- * Extracts user ID and attaches it to request headers for downstream services
+ * Middleware to verify access token from `Authorization` header.
+ * This is going to be the authentication mechanism which will authenticate user.
+ * Extracts user ID and attaches it to request headers for downstream services.
  *
  */
 function requireAuth(req, res, next) {

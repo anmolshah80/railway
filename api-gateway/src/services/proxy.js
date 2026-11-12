@@ -40,7 +40,7 @@ class CircuitBreaker {
     }
 
     try {
-      const response = await response();
+      const response = await request();
       this.onSuccess();
 
       return response;

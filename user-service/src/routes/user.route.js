@@ -11,9 +11,9 @@ const {
 
 const router = express.Router();
 
-router.get('/', getUserContext, getProfile);
-router.put('/', getUserContext, updateProfile);
-router.delete('/', getUserContext, deleteProfile);
+router.get('/profile', getUserContext, getProfile);
+router.put('/profile', getUserContext, updateProfile);
+router.delete('/profile', getUserContext, deleteProfile);
 
 router.get('/internal/:userId', internalAuth, getUserInternal);
 

@@ -51,7 +51,7 @@ app.get('/health', (req, res) => {
   });
 });
 
-app.use('/api', routes);
+app.use('/api/v1', routes);
 
 app.use(notFound);
 app.use(errorHandler);

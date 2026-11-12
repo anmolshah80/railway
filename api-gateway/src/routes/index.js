@@ -20,7 +20,7 @@ const router = express.Router();
  */
 
 const userServiceProxy = createProxy(
-  'user-service',
+  'userService',
   config.SERVICES.USER_SERVICE_URL,
 );
 
@@ -57,28 +57,28 @@ router.post(
 
 // private routes
 router.get(
-  '/users/profile',
+  '/users/user/profile',
   requireAuth,
   combinedRateLimit(),
   userServiceProxy,
 );
 
 router.put(
-  '/users/profile',
+  '/users/user/profile',
   requireAuth,
   combinedRateLimit(),
   userServiceProxy,
 );
 
 router.delete(
-  '/users/profile',
+  '/users/user/profile',
   requireAuth,
   combinedRateLimit(),
   userServiceProxy,
 );
 
 const adminServiceProxy = createProxy(
-  'admin-service',
+  'adminService',
   config.SERVICES.ADMIN_SERVICE_URL,
 );
 
@@ -135,7 +135,7 @@ router.put(
 // SEARCH SERVICE ROUTES (public - no auth required)
 // =================================================
 const searchServiceProxy = createProxy(
-  'search-service',
+  'searchService',
   config.SERVICES.SEARCH_SERVICE_URL,
 );
 
@@ -155,7 +155,7 @@ router.get(
 // INVENTORY SERVICE ROUTES (public read-only)
 // ===========================================
 const inventoryServiceProxy = createProxy(
-  'inventory-service',
+  'inventoryService',
   config.SERVICES.INVENTORY_SERVICE_URL,
 );
 
@@ -181,7 +181,7 @@ router.get(
 // BOOKING SERVICE ROUTES
 // ======================
 const bookingServiceProxy = createProxy(
-  'booking-service',
+  'bookingService',
   config.SERVICES.BOOKING_SERVICE_URL,
 );
 
@@ -219,7 +219,7 @@ router.post(
 // PAYMENT SERVICE ROUTES (webhook only - public)
 // ==============================================
 const paymentServiceProxy = createProxy(
-  'payment-service',
+  'paymentService',
   config.SERVICES.PAYMENT_SERVICE_URL,
 );
 

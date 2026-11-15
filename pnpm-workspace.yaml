@@ -4,3 +4,4 @@ packages:
   - 'booking-service'
   - 'notification-service'
   - 'api-gateway'
+  - 'search-service'

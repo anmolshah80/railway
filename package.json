@@ -8,7 +8,8 @@
     "dev:booking-service": "pnpm --filter booking-service dev",
     "dev:notification-service": "pnpm --filter notification-service dev",
     "dev:api-gateway": "pnpm --filter api-gateway dev",
-    "dev:all-services": "pnpm --stream -r run dev"
+    "dev:all-services": "pnpm --stream -r run dev",
+    "dev:search-service": "pnpm --filter search-service dev"
   },
   "keywords": [],
   "author": "",
